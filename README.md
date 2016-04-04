@@ -23,4 +23,4 @@ write-ups
 ...
 ```
 
-\#HackTheSummer and have fun!
+\#HackTheForce and have fun!
