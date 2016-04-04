@@ -1,13 +1,27 @@
-# write-ups
-CTF write-ups maintained by the [JDIs](http://www.jdis.ca/).
+# CTF Write-ups
+The goal of this repository is to keep track of our participations in online and physical CTFs. By doing a write-up, you will help security newcomers to get engaged in our community.
 
-## Contributing
-0. Fork this repository
-1. Create a folder for the competition if it does not already exist
-2. Create a markdown `.md` file with the name of the challenge, explaining the
-   steps that you took as if you would explain them to another fellow JDI
-3. If your write-up contains images, make sure to add them to a `images`
-   sub-folder in your competition folder
-4. Make a pull-request to this repository with your write-up
-5. ...
-6. Profit!
+## Guidelines
+- Contribute by submiting PRs
+- Consider making your write-up accessible to all your fellow JDIs
+- Don't be shy to present your solutions
+- If you find a mistake, consider submiting a PR to fix it
+- If you are doing a live CTF, consider waiting for the end before submiting your PRs
+- Each event/CTF should have its own folder
+- Please add a README.md in every new folder to give at least a minimal description of the event
+
+## Folder hierarchy
+```
+write-ups
+|-- CTF_name
+|     |-- README.md (event description)
+|     +-- pwn_42
+|     |    |-- README.md (your solution)
+|     |    +-- Extra files
+      +-- simple_challenge.md (if it does not require other files)
++-- Another CTF
+      |-- 
+...
+```
+
+\#HackTheSummer and have fun!
