@@ -19,7 +19,7 @@ the `encryptxx` files represent.
 
 
 ## Key Extraction
-The result from the first team is the glorious
+The first team came up with the glorious
 [`convert_key.py`](convert_key.py) script (Python 2).
 
 Running it gives us the following: 
@@ -27,7 +27,7 @@ Running it gives us the following:
 
 Converting that to a hex number (thanks Python):
 ```
-> hex(key_str)
+> hex(0b001101000101010101101011011110100011100100110101010001100011001001011001011100010101000001101001)
 0x34556b7a3935463259715069
 ```
 
@@ -39,7 +39,7 @@ Taking a look at the contents of `encrypted` by base64-decoding it
 (`cat encrypted | base64 -d`), we see that the result starts with the string
 `Salted__`.
 
-Googling a bit tells us that this is the
+Googling tells us that this is the
 [OpenSSL salted format](http://justsolve.archiveteam.org/wiki/OpenSSL_salted_format).
 
 Our guess is then that we need to decrypt that file using the key that we
@@ -58,8 +58,8 @@ Let's start by putting our hex password in a binary file:
 
 Now, we want to try all the available algorithms in OpenSSL to find the right
 one. We also print some information about the decoded files to see if we can
-find something interesting (show `file` and `strings` output) that tells us that
-we properly decrypted it.
+find something interesting (show `file` and `strings` output) to tell us if we
+properly decrypted it.
 
 See [`try_algos.sh`](try_algos.sh) for our bash script that does just that.
 
@@ -81,10 +81,11 @@ Since Word files can be unzipped:
 ```
 > unzip word.docx
 > grep -i -r ndh word
+NDH[59rRS57bd5WH8RxgPbRS27q89a5bWrjL]
 ```
 
-:partyhat:! `NDH[59rRS57bd5WH8RxgPbRS27q89a5bWrjL]`
+:partyhat:
 
 Flag acquired.
 
-Bonus: first team to submit it.
+Bonus: we were the first team to submit it.
