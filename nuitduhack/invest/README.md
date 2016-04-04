@@ -84,7 +84,7 @@ Since Word files can be unzipped:
 NDH[59rRS57bd5WH8RxgPbRS27q89a5bWrjL]
 ```
 
-:partyhat:
+:tada:
 
 Flag acquired.
 
