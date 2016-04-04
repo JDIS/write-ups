@@ -86,6 +86,6 @@ NDH[59rRS57bd5WH8RxgPbRS27q89a5bWrjL]
 
 :tada:
 
-Flag acquired.
+\#TheForceHasBeenHacked
 
 Bonus: we were the first team to submit it.
