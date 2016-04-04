@@ -18,7 +18,7 @@ write-ups
 |     +-- pwn_42
 |     |    |-- README.md (your solution)
 |     |    +-- Extra files
-      +-- simple_challenge.md (if it does not require other files)
+|     +-- simple_challenge.md (if it does not require other files)
 +-- Another CTF
 ...
 ```
