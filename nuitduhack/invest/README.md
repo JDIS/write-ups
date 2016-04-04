@@ -9,6 +9,7 @@ Already, we see some interesting stuff:
 - image of a logic circuit:
 
 ![Logic circuit](circuit.jpeg)
+
 `key.txt` has a number of characters that is a multiple of 8 (the number of
 inputs in that logic circuit). Coincidence? Surely not.
 
@@ -71,6 +72,7 @@ decrypted/aes-256-cbc: Microsoft Word 2007+
 
 ## Getting trolled
 Opening the Word file, we are greeted with a nice little troll image:
+
 ![Thanks, NDH.](troll.jpeg)
 
 No way. It has to be there.
