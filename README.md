@@ -9,6 +9,7 @@ The goal of this repository is to keep track of our participations in online and
 - If you are doing a live CTF, consider waiting for the end before submiting your PRs (take notes though!).
 - Each event/CTF should have its own folder.
 - Please add a README.md in every new folder to give at least a minimal description of the event.
+- Finish your write-up with `\#TheForceHasBeenHacked`
 
 ## Folder hierarchy
 ```
