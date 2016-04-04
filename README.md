@@ -20,7 +20,6 @@ write-ups
 |     |    +-- Extra files
       +-- simple_challenge.md (if it does not require other files)
 +-- Another CTF
-      |-- 
 ...
 ```
 
