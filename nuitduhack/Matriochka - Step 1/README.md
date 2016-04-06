@@ -6,7 +6,7 @@ We opened the file in IDA pro to find this screen:
 
 ![IDA Pro screen](idascreen.png)
 
-We immediately see that the program ask for password and just after that
+We immediately see that the program asks for password and just after that
 it moves a string into the esi register.
 We guessed that the password might be this string: Much_secure__So_safe__Wow.
 The flag is the password!

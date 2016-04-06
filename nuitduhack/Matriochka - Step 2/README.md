@@ -9,13 +9,13 @@ F5 button to generate a pseudocode. After looking through all the available func
 
 This is definitely the password verification function! So we started from the top to find the value of each character.
 
-For the first character, we have the line: **(_BYTE **)(a2 + 8) != 80
+For the first character, we have the line: `**(_BYTE **)(a2 + 8) != 80`
 
 We can safely assume that a2+8 is the position of the first character of the string when we look at the co
 de!
 So we have string[0] = 80 = 'P'.
 
-Now for the fourth character we have the line: 2* *(_BYTE *)(*(_QWORD *)(a2 + 8) + 3LL) != 200
+Now for the fourth character we have the line: `2* *(_BYTE *)(*(_QWORD *)(a2 + 8) + 3LL) != 200`
 
 We can simplify this line like this: 2*string[3] != 200
 

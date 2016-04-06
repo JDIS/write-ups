@@ -7,7 +7,7 @@ F5 button to generate a pseudocode. After looking through all the available func
 
 ![IDA Pro screen](idascreen1.png)
 
-The program seems to make use of the c++ signal function. The signal function fires up the specified function when the bound signal is fired.
+The program seems to make use of the unix signals. The signal function fires up the specified function when the bound signal is fired.
 We simply assumed that the functions are somehow called, so we went inside the sub_4007FD function to look for more!
 
 ![sub_4007FD](idascreen2.png)
