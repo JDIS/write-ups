@@ -15,12 +15,13 @@ information about a user in the DB:
 
 ## Service Analysis
 Taking a look at [the service's source code](public_server_ea2e768e20e89fb1aafbbc547cdb4636.py),
-we see that it does the following, in details (which is basically [SRP](https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol)):
+we see that it does the following, in details (which is basically [SRP](https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol)): (feel free to skip the specifics, this is
+mainly a reference for later steps)
 
 *Note: `^` represents `pow` and all calculations are implicitly mod N*
 
 - Declares `N` and `g` as big constants.
-- Import a list of permitted users (our extracted `get_flag `user is one of those).
+- Import a list of permitted users (our extracted `get_flag` user is one of those).
 
 - Receives a `username` from us.
 - Receives a `public_client` int from us.
@@ -53,8 +54,8 @@ Basically, we want to do the following:
 - Provide a `proof` out of that.
 
 ## Predicting `session_secret`
-Predicting `session_secret` without worrying about forbidden values of `c` is
-relatively easy.
+Predicting `session_secret` without worrying about forbidden values of `c` yet
+is relatively easy.
 
 We are given the `residue` and know that it is calculated as
 `public_server + verifier`. We know the `verifier`. Thus, we can calculate
@@ -78,36 +79,40 @@ Therefore, we just need to pick a valid `something` value and we can predict
 `session_secret`!
 
 ## Choosing a `public_client`
+However, we can't just set that `something` value. The only leverage that we
+have to influence the value of `c` is `public_client`.
+
 We want to choose a `public_client` value such that:
-`public_client * verifier = something of the form 'g ^ something'`.
+`public_client * verifier = g ^ something`.
 
 If we pick `public_client` to be the [modular inverse](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse)
 of `verifier`, we get:
 
 ```
-   modinv(verifier) * verifier = g ^ something
-=> 1 = g ^ something
+   (modinv(verifier)) * verifier = g ^ something
+=>                             1 = g ^ something
 ```
 
 By [Fermat's Little Theorem](https://en.wikipedia.org/wiki/Fermat%27s_little_theorem),
 we know that `a ^ (n-1) = 1 (mod n)`, if `n` is prime (which [factordb](http://factordb.com/index.php?query=168875487862812718103814022843977235420637243601057780595044400667893046269140421123766817420546087076238158376401194506102667350322281734359552897112157094231977097740554793824701009850244904160300597684567190792283984299743604213533036681794114720417437224509607536413793425411636411563321303444740798477587) confirms for our `N`).
-This means that by picking `public_client = modinv(verifier)`, we know that
-`something = N - 1`: `g ^ (N - 1) = 1`.
+This means that by picking `public_client = modinv(verifier)`, we fit the
+theorem and get `g ^ (N - 1) = 1`, but we give `N - 1` the name `something`, and
+`1` happens to be calculated through `public_client * verifier`.
 
-However, a `c = public_client * verifier = 1` result is forbidden by the server.
+However, `c = public_client * verifier = 1` is forbidden by the server.
 
 `c = g ^ 2` is not.
 
 Let's play with our current equation to produce a valid `c`:
 ```
            g ^ (N - 1) = 1
-=> g ^ (N - 1) * g ^ 2 = 1 * g ^ 2
-=>     g ^ (N - 1 + 2) = g ^ 2
+=> g ^ (N - 1) * g ^ 2 = 1 * g ^ 2     (* g^2 on each side)
+=>     g ^ (N - 1 + 2) = g ^ 2         (group exponents)
 =>         g ^ (N + 1) = g ^ 2
 ```
 
 Now, `c = g ^ 2` and is valid! We can produce `c` with:
-`c = public_client * verifier = (g ^ 2 * modinv(verifier)) * verifier) = g ^ 2`.
+`c = public_client * verifier = (g ^ 2 * modinv(verifier)) * verifier) = g ^ 2 * 1 = g ^ 2`.
 
 Thus, we choose `public_client = g ^ 2 * modinv(verifier)` to get a `c` of the
 form `g ^ (N + 1)`.
@@ -123,11 +128,15 @@ Still, using *Fermat's Little Theorem* is worth some swag points.
 - S: `public_client`?
 - C: `g ^ 2 * modinv(verifier)`.
 - S: `salt`. `residue`.
-- C: [extract `public_server` from `residue`]
-- C: [predict `session_secret` as `public_server ^ (N + 1)`]
-- C: [calculate `proof` from `session_secret`]
+
+[extract `public_server` from `residue`]
+
+[predict `session_secret` as `public_server ^ (N + 1)`]
+
+[calculate `proof` from `session_secret`]
+
 - C: `proof`.
 - ...
 - :tada:
 
-#TheForceHasBeenHacked
+\#TheForceHasBeenHacked
