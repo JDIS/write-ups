@@ -96,8 +96,14 @@ of `verifier`, we get:
 By [Fermat's Little Theorem](https://en.wikipedia.org/wiki/Fermat%27s_little_theorem),
 we know that `a ^ (n-1) = 1 (mod n)`, if `n` is prime (which [factordb](http://factordb.com/index.php?query=168875487862812718103814022843977235420637243601057780595044400667893046269140421123766817420546087076238158376401194506102667350322281734359552897112157094231977097740554793824701009850244904160300597684567190792283984299743604213533036681794114720417437224509607536413793425411636411563321303444740798477587) confirms for our `N`).
 This means that by picking `public_client = modinv(verifier)`, we fit the
-theorem and get `g ^ (N - 1) = 1`, but we give `N - 1` the name `something`, and
-`1` happens to be calculated through `public_client * verifier`.
+theorem and get `g ^ (N - 1) = 1`, but by giving the name `something` to `N - 1`,
+and `1` happens to be calculated through `public_client * verifier`. In other
+words:
+
+```
+g ^ (  N - 1  ) = 1                           -> Fermat's Little Theorem
+g ^ (something) = (public_client * verifier)  -> applied to our problem
+```
 
 However, `c = public_client * verifier = 1` is forbidden by the server.
 
