@@ -96,32 +96,32 @@ of `verifier`, we get:
 By [Fermat's Little Theorem](https://en.wikipedia.org/wiki/Fermat%27s_little_theorem),
 we know that `a ^ (n-1) = 1 (mod n)`, if `n` is prime (which [factordb](http://factordb.com/index.php?query=168875487862812718103814022843977235420637243601057780595044400667893046269140421123766817420546087076238158376401194506102667350322281734359552897112157094231977097740554793824701009850244904160300597684567190792283984299743604213533036681794114720417437224509607536413793425411636411563321303444740798477587) confirms for our `N`).
 This means that by picking `public_client = modinv(verifier)`, we fit the
-theorem and get `g ^ (N - 1) = 1`, but by giving the name `something` to `N - 1`,
+theorem and get `g ^ (N-1) = 1`, but by giving the name `something` to `N-1`,
 and `1` happens to be calculated through `public_client * verifier`. In other
 words:
 
 ```
-g ^ (  N - 1  ) = 1                           -> Fermat's Little Theorem
+g ^ (   N-1   ) = 1                           -> Fermat's Little Theorem
 g ^ (something) = (public_client * verifier)  -> applied to our problem
 ```
 
 However, `c = public_client * verifier = 1` is forbidden by the server.
 
-`c = g ^ 2` is not.
+`c = g^2` is not.
 
 Let's play with our current equation to produce a valid `c`:
 ```
-           g ^ (N - 1) = 1
-=> g ^ (N - 1) * g ^ 2 = 1 * g ^ 2     (* g^2 on each side)
-=>     g ^ (N - 1 + 2) = g ^ 2         (group exponents)
-=>         g ^ (N + 1) = g ^ 2
+           g ^ (N-1) = 1
+=>   g ^ (N-1) * g^2 = 1 * g^2     (* g^2 on each side)
+=>       g ^ (N-1+2) = g^2         (group exponents)
+=>         g ^ (N+1) = g^2
 ```
 
-Now, `c = g ^ 2` and is valid! We can produce `c` with:
-`c = public_client * verifier = (g ^ 2 * modinv(verifier)) * verifier) = g ^ 2 * 1 = g ^ 2`.
+Now, `c = g^2` and is valid! We can produce `c` with:
+`c = public_client * verifier = (g^2 * modinv(verifier)) * verifier) = g^2 * 1 = g^2`.
 
-Thus, we choose `public_client = g ^ 2 * modinv(verifier)` to get a `c` of the
-form `g ^ (N + 1)`.
+Thus, we choose `public_client = g^2 * modinv(verifier)` to get a `c` of the
+form `g ^ (N+1)`.
 
 Note: this section was a bit of an overkill in retrospect. The normal SRP
 protocol could have been used with just an additional multiplication with the
@@ -132,12 +132,12 @@ Still, using *Fermat's Little Theorem* is worth some swag points.
 - S: User?
 - C: `get_flag`.
 - S: `public_client`?
-- C: `g ^ 2 * modinv(verifier)`.
+- C: `g^2 * modinv(verifier)`.
 - S: `salt`. `residue`.
 
 [extract `public_server` from `residue`]
 
-[predict `session_secret` as `public_server ^ (N + 1)`]
+[predict `session_secret` as `public_server ^ (N+1)`]
 
 [calculate `proof` from `session_secret`]
 
