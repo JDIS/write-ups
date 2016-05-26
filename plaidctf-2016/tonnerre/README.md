@@ -117,7 +117,8 @@ Let's play with our current equation to produce a valid `c`:
 =>         g ^ (N+1) = g^2
 ```
 
-Now, `c = g^2` and is valid! We can produce `c` with:
+Now, we produced `c = g^2`, which is accepted by the server! We can produce this
+`c` with:
 `c = public_client * verifier = (g^2 * modinv(verifier)) * verifier) = g^2 * 1 = g^2`.
 
 Thus, we choose `public_client = g^2 * modinv(verifier)` to get a `c` of the
